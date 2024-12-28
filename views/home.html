@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD Railway</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            margin: 0;
+            font-family: "Hind Siliguri", sans-serif; /* Hind Siliguri font fallback */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f4f4;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .container img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            
+        }
+
+        .buttons a button,
+        .buttons button {
+            font-size: 1.2em;
+            font-weight: 700;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            font-family: "Hind Siliguri", sans-serif; /* Hind Siliguri font fallback */
+        }
+
+        .buttons a button {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .buttons button {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .buttons a button:hover {
+            background-color: #0056b3;
+        }
+
+        .buttons button:hover {
+            background-color: #b02a37;
+        }
+
+        footer {
+            margin: 20px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        #dropdownMenuButton, .dropdown-menu {
+            margin-right: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>আপনাকে স্বাগতম জানাচ্ছি</h1>
+        <!-- Add Bootstrap Dropdown -->
+        <div class="dropdown float-right">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                More Options     .
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/jatri">আমি যাত্রী</a>
+                <a class="dropdown-item" href="/wait">ট্রেনের তথ্য</a>
+                <a class="dropdown-item" href="/home">প্রোফাইল</a>
+                <a class="dropdown-item" href="/home">লগ আউট</a>
+                <a class="dropdown-item" href="/home">টিকেট</a>
+                <a class="dropdown-item" href="/home">সময়সূচী এবং রুট</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <img src="https://www.bproperty.com/blog/wp-content/uploads/Cover-31-1170x508.jpg" alt="Bangladesh Railway">
+
+        <div class="buttons">
+            <a href="/jatri"><button>ট্রেনে আছি</button></a>
+            <a href="/wait"><button>রেলের জন্য অপেক্ষমান/ট্রেনের তথ্য</button></a>
+            <button id="logoutBtn">লগ আউট</button>
+        </div>
+    </div>
+
+    <footer>
+        আমরা আছি আপনার ভ্রমণকে সহজ করতে
+    </footer>
+    
+     <!-- Bootstrap JS -->
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="/js/home.js"></script>
+</body>
+</html>

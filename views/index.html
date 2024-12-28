@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Hind Siliguri", sans-serif; /* Hind Siliguri font fallback */
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            margin: 0;
+            flex-direction: column;
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            display: none; /* Hidden by default */
+            margin-bottom: 10px;
+        }
+        h2 {
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-family: "Hind Siliguri", sans-serif; /* Hind Siliguri font fallback */
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        p {
+            color: red;
+            font-size: 12px;
+        }
+        .toggle-btns {
+            display: flex;
+            gap: 10px;
+            width: 300px;
+            margin-top: 20px;
+        }
+        .toggle-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            width: 50%;
+        }
+        .toggle-btn:hover {
+            background-color: #0056b3;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .content {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .content img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        #login-number, #login-password, #signup-number, #signup-password {
+            width: 270px;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>স্বাগতম লাইভ ট্রেন ট্রাকিং এবং আপডেট সিস্টেমে</h1>
+    </header>
+
+    <div class="content">
+        <img src="https://www.bproperty.com/blog/wp-content/uploads/Cover-31-1170x508.jpg" alt="Train">
+        <p>আমাদের দেশের ট্রেন যাতায়াত ব্যবস্থাকে আরো বেশি গতিশীল করার জন্য</p>
+    </div>
+
+    <!-- Buttons Above Forms Initially -->
+    <div class="toggle-btns" id="button-container">
+        <button class="toggle-btn" onclick="showForm('login')">Show Login</button>
+        <button class="toggle-btn" onclick="showForm('signup')">Show Sign Up</button>
+    </div>
+
+    <!-- Login Form -->
+    <div class="container" id="login-form-container">
+        <h2>Login</h2>
+        <form id="login-form" action="/login">
+            <input type="text" id="login-number" placeholder="Enter number (01XXXXXXXXX)" required>
+            <input type="password" id="login-password" placeholder="Enter 6-character password" required>
+            <button type="button" onclick="handleLogin()">Login</button>
+            <p id="login-error"></p>
+            <p id="login-success"></p>
+        </form>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div class="container" id="signup-form-container">
+        <h2>Sign Up</h2>
+        <form id="signup-form" action="/register" method="post">
+            <input type="text" id="signup-number" name="id" placeholder="Enter number (01XXXXXXXXX)" required>
+            <input type="password" id="signup-password" name="password" placeholder="Enter 6-character password" required>
+            <button type="button" onclick="handleSignUp()">Sign Up</button>
+            <p id="signup-error"></p>
+            <p id="signup-success"></p>
+        </form>
+    </div>
+
+    <script src="/js/login.js"></script>
+</body>
+</html>
