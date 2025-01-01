@@ -102,13 +102,33 @@ async function updateLocation(position) {
 }
 
 // Track location
+// function trackLocation() {
+//     if (navigator.geolocation) {
+//         navigator.geolocation.watchPosition(updateLocation, () => alert('Location services are disabled.'), { enableHighAccuracy: true });
+//     } else {
+//         alert('Geolocation is not supported.');
+//     }
+// }
+
+// Track location
 function trackLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(updateLocation, () => alert('Location services are disabled.'), { enableHighAccuracy: true });
+        navigator.geolocation.watchPosition(
+            updateLocation, // Success callback
+            (error) => {
+                if (error.code === error.PERMISSION_DENIED) {
+                    alert('Location services are disabled.');
+                } else {
+                    console.error('Geolocation error:', error);
+                }
+            },
+            { enableHighAccuracy: true }
+        );
     } else {
         alert('Geolocation is not supported.');
     }
 }
+
 
 
 
