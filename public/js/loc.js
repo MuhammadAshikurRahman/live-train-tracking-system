@@ -17,9 +17,6 @@ async function fetchTrainData() {
     }
 }
 
-
-
-
 // Fetch railway lines data
 async function fetchRailwayLines() {
     try {
@@ -36,7 +33,6 @@ async function fetchRailwayLines() {
     } catch (error) {
         console.error("Error fetching railway lines:", error);
     }
-  //  setTimeout(fetchRailwayLines, 5000);
 }
 
 // Check proximity to railway
@@ -49,30 +45,26 @@ async function checkProximity(position) {
         if (line.type === "way" && line.geometry) {
             const railwayPoints = line.geometry.map((point) => L.latLng(point.lat, point.lon));
             railwayPoints.forEach((railPoint) => {
-            const distance = userLocation.distanceTo(railPoint);
-            console.log(`Distance to railway point: ${distance} meters`);
-            if (distance <= 70000) { // Change based on your requirement
-                nearRailway = true;
-            }
-        });
-
+                const distance = userLocation.distanceTo(railPoint);
+                console.log(`Distance to railway point: ${distance} meters`);
+                if (distance <= 70000) { // Change based on your requirement
+                    nearRailway = true;
+                }
+            });
         }
     });
 
     const statusElement = document.getElementById("status");
     if (nearRailway) {
-        statusElement.textContent = "আপনি রেলে আছেন";
-        await updateDatabase(true);
+        statusElement.textContent = "আপনি রেলে আছেন";  // Update status in Bangla
+        await updateDatabase(true); // Call updateDatabase
     } else {
-        statusElement.textContent = "আপনি রেলে নেই";
-        await updateDatabase(false);
+        statusElement.textContent = "আপনি রেলে নেই";  // Update status in Bangla
+        await updateDatabase(false); // Call updateDatabase
     }
 
     setTimeout(checkProximity, 5000); // Continuously check every 5 seconds
-
 }
-
-
 
 // Update location
 async function updateLocation(position) {
@@ -102,75 +94,47 @@ async function updateLocation(position) {
 }
 
 // Track location
-// function trackLocation() {
-//     if (navigator.geolocation) {
-//         navigator.geolocation.watchPosition(updateLocation, () => alert('Location services are disabled.'), { enableHighAccuracy: true });
-//     } else {
-//         alert('Geolocation is not supported.');
-//     }
-// }
-
-// Track location
 function trackLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(
-            updateLocation, // Success callback
-            (error) => {
-                if (error.code === error.PERMISSION_DENIED) {
-                    alert('Location services are disabled.');
-                } else {
-                    console.error('Geolocation error:', error);
-                }
-            },
-            { enableHighAccuracy: true }
-        );
+        navigator.geolocation.watchPosition(updateLocation, () => alert('Location services are disabled.'), { enableHighAccuracy: true });
     } else {
         alert('Geolocation is not supported.');
     }
 }
 
-
-
-
 // Update database
 async function updateDatabase(isNearRailway) {
-if (isNearRailway) {
-const location = document.getElementById('location').value;
-const speed = document.getElementById('speedValue').textContent.replace(' km/h', '');
+    if (isNearRailway) {
+        const location = document.getElementById('location').value;
+        const speed = document.getElementById('speedValue').textContent.replace(' km/h', '');
 
-try {
-    await fetch('/updateTrainInfo', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            location: location,
-            speed: speed
-        })
-    });
-} catch (error) {
-    console.error("Failed to update database:", error);
+        try {
+            await fetch('/updateTrainInfo', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    location: location,
+                    speed: speed
+                })
+            });
+        } catch (error) {
+            console.error("Failed to update database:", error);
+        }
+    } else {
+        try {
+            await fetch('/updateTrainInfo', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    location: null,
+                    speed: null
+                })
+            });
+        } catch (error) {
+            console.error("Failed to update database with null values:", error);
+        }
+    }
 }
-} else {
-try {
-    // If not near railway, send empty or null values
-    await fetch('/updateTrainInfo', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            location: null,
-            speed: null
-        })
-    });
-} catch (error) {
-    console.error("Failed to update database with null values:", error);
-}
-}
-
-}
-// Update every 5 seconds
-setInterval(() => {updateDatabase(isNearRailway);}, 5000); // 5000 ms = 5 seconds
-
-
 
 // Chat functionality
 document.getElementById('chatButton').addEventListener('click', () => {
