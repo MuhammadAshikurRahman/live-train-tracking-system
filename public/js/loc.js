@@ -39,7 +39,6 @@ async function fetchRailwayLines() {
   //  setTimeout(fetchRailwayLines, 5000);
 }
 
-// Check proximity to railway
 async function checkProximity(position) {
     const { latitude, longitude } = position.coords;
     const userLocation = L.latLng(latitude, longitude);
@@ -49,28 +48,30 @@ async function checkProximity(position) {
         if (line.type === "way" && line.geometry) {
             const railwayPoints = line.geometry.map((point) => L.latLng(point.lat, point.lon));
             railwayPoints.forEach((railPoint) => {
-            const distance = userLocation.distanceTo(railPoint);
-            console.log(`Distance to railway point: ${distance} meters`);
-            if (distance <= 70000) { // Change based on your requirement
-                nearRailway = true;
-            }
-        });
-
+                const distance = userLocation.distanceTo(railPoint);
+                console.log(`Distance to railway point: ${distance} meters`);
+                if (distance <= 70000) { // Change this distance threshold if needed
+                    nearRailway = true;
+                }
+            });
         }
     });
 
+    console.log("Near railway:", nearRailway); // Debugging log
     const statusElement = document.getElementById("status");
     if (nearRailway) {
-        statusElement.innerHTML = "আপনি রেলে আছেন";
+        console.log("Updating status: আপনি রেলে আছেন");
+        statusElement.textContent = "আপনি রেলে আছেন";
         await updateDatabase(true);
     } else {
-        statusElement.innerHTML = "আপনি রেলে নেই";
+        console.log("Updating status: আপনি রেলে নেই");
+        statusElement.textContent = "আপনি রেলে নেই";
         await updateDatabase(false);
     }
 
-    setTimeout(checkProximity, 5000); // Continuously check every 5 seconds
-
+    setTimeout(() => checkProximity(position), 5000); // Continuously check every 5 seconds
 }
+
 
 
 
