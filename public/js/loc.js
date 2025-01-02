@@ -60,13 +60,13 @@ async function checkProximity(position) {
     });
 
 // ডায়নামিক মেসেজ আপডেট
-const statusElement1 = document.getElementById("status1");
-const statusElement2 = document.getElementById("status2");
+const statusElement = document.getElementById("status");
+
     if (nearRailway) {
-        statusElement1.textContent = "আপনি রেলে আছেন";
+        statusElement.textContent = "আপনি রেলে আছেন";
         await updateDatabase(true);
     } else {
-        statusElement2.innerText = "আপনি রেলে নেই";
+        statusElement.innerText = "আপনি রেলে নেই";
         await updateDatabase(false);
     }
 
