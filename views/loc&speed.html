@@ -155,15 +155,6 @@
         #maptt{
             padding: 10px;
         }
-        #status {
-            font-size: 16px; /* Ensure smaller font size for mobile */
-            margin: 20px 0px 80px;
-            padding: 10px;
-            display: inline-block;
-        }
-        .statusdiv {
-            margin-top:10px
-        }
     </style>
 </head>
 <body>
@@ -174,13 +165,10 @@
         <div class="submited-train">
             <p>আপনার ট্রেনের নাম -  <span id="trainName">Loading...</span></p>
         </div>
-         
         <div class="section">
             <label for="map" id="maptt">Your Train Location</label>
             <div id="map">Map will be displayed here</div>
         </div>
-    </div>
-        
         <div class="responsive">
             <div class="section speed-meter">
                 <div class="indicator">Speed</div>
@@ -194,16 +182,15 @@
                 <label for="areaInfo">এরিয়া তথ্য :</label>
                 <input type="text" id="areaInfo" placeholder="District and Upazila" readonly>
             </div>
-            
+        </div>
         <div class="sticky-chat-btn" id="chatButton">টেক্সট আপডেট দিন</div>
         <div class="sticky-chat-input" id="chatInput">
             <textarea id="webChat" rows="4" placeholder="ট্রেনের সর্বশেষ অবস্থান এখানে লিখুন ..." required></textarea>
             <button type="button">Send</button>
         </div>
 
-     <div class="statusdiv"><p id="status" >...</p></div>
-            
-        
+    <div>
+        <p id="status" style="margin-top: 20px; color: red;">...</p>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
