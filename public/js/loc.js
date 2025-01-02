@@ -60,16 +60,24 @@ async function checkProximity(position) {
     });
 
 // ডায়নামিক মেসেজ আপডেট
-const statusElement = document.getElementById("status");
-if (nearRailway) {
-    statusElement.textContent = "আপনি রেলে আছেন";
-    statusElement.style.color = "green"; // Ensure visible feedback
-    await updateDatabase(true);
-} else {
-    statusElement.textContent = "আপনি রেলে নেই";
-    statusElement.style.color = "red"; // Ensure visible feedback
-    await updateDatabase(false);
+const statusNotInTrain = document.getElementById("status-not-in-train");
+const statusInTrain = document.getElementById("status-in-train");
+
+// Update status dynamically
+function updateStatus(isNearRailway) {
+    if (isNearRailway) {
+        statusNotInTrain.style.display = "none"; // Hide "আপনি রেলে নেই"
+        statusInTrain.style.display = "block";  // Show "আপনি রেলে আছেন"
+    } else {
+        statusNotInTrain.style.display = "block"; // Show "আপনি রেলে নেই"
+        statusInTrain.style.display = "none";    // Hide "আপনি রেলে আছেন"
+    }
 }
+
+// Example: Call the function with the appropriate value
+updateStatus(true);  // Test with near railway
+// updateStatus(false); // Test without near railway
+
 
 
     setTimeout(checkProximity, 5000); // Continuously check every 5 seconds
