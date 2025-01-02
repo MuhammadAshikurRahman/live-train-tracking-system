@@ -61,14 +61,26 @@ async function checkProximity(position) {
 
 
     
-const statusElement = document.getElementById("status");
-    if (nearRailway) {
-        statusElement.textContent = "আপনি রেলে আছেন";
-        await updateDatabase(true);
-    } else {
-        statusElement.innerText = "আপনি রেলে নেই";
-        await updateDatabase(false);
-    }
+const statusContainer = document.getElementById("status-container"); // প্যারেন্ট কন্টেইনার খুঁজে বের করুন
+if (!statusContainer) {
+    console.error("Status container not found!");
+    return;
+}
+
+// ডায়নামিক মেসেজ আপডেট
+const newStatus = document.createElement("p"); // নতুন <p> ট্যাগ তৈরি
+if (nearRailway) {
+    newStatus.textContent = "আপনি রেলে আছেন"; // মেসেজ সেট করুন
+    newStatus.style.color = "green"; // রঙ সবুজ
+    await updateDatabase(true); // ডাটাবেস আপডেট করুন
+} else {
+    newStatus.textContent = "আপনি রেলে নেই"; // মেসেজ সেট করুন
+    newStatus.style.color = "red"; // রঙ লাল
+    await updateDatabase(false); // ডাটাবেস আপডেট করুন
+}
+
+// নতুন <p> ট্যাগ কন্টেইনারে যোগ করুন
+statusContainer.appendChild(newStatus);
 
     setTimeout(checkProximity, 5000); // Continuously check every 5 seconds
 }
