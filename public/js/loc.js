@@ -61,16 +61,18 @@ async function checkProximity(position) {
 
     const statusElement = document.getElementById("status");
     if (nearRailway) {
-        statusElement.innerHTML = "আপনি রেলে আছেন";
+        statusElement.textContent = "আপনি রেলে আছেন";
         await updateDatabase(true);
     } else {
-        statusElement.innerHTML = "আপনি রেলে নেই";
+        statusElement.textContent = "আপনি রেলে নেই";
         await updateDatabase(false);
     }
 
     setTimeout(checkProximity, 5000); // Continuously check every 5 seconds
 
 }
+
+
 
 
 
