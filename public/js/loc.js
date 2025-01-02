@@ -59,23 +59,18 @@ async function checkProximity(position) {
         }
     });
 
-   const statusElement = document.getElementById("status");
-if (nearRailway) {
-    statusElement.textContent = "আপনি রেলে আছেন";
-    statusElement.style.display = "none"; // Force DOM refresh
-    setTimeout(() => {
-        statusElement.style.display = "block";
-    }, 50);
-    await updateDatabase(true);
-} else {
-    statusElement.textContent = "আপনি রেলে নেই";
-    statusElement.style.display = "none"; // Force DOM refresh
-    setTimeout(() => {
-        statusElement.style.display = "block";
-    }, 50);
-    await updateDatabase(false);
-}
 
+    
+const statusElement = document.getElementById("status");
+    if (nearRailway) {
+        statusElement.textContent = "আপনি রেলে আছেন";
+        await updateDatabase(true);
+    } else {
+        statusElement.innerText = "আপনি রেলে নেই";
+        await updateDatabase(false);
+    }
+
+    setTimeout(checkProximity, 5000); // Continuously check every 5 seconds
 }
 
 
