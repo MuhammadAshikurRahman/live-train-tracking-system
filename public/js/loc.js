@@ -45,31 +45,36 @@ async function checkProximity(position) {
     const userLocation = L.latLng(latitude, longitude);
     let nearRailway = false;
 
+    console.log("Checking proximity...");
     railwayData.forEach((line) => {
         if (line.type === "way" && line.geometry) {
             const railwayPoints = line.geometry.map((point) => L.latLng(point.lat, point.lon));
             railwayPoints.forEach((railPoint) => {
-            const distance = userLocation.distanceTo(railPoint);
-            console.log(`Distance to railway point: ${distance} meters`);
-            if (distance <= 70000) { // Change based on your requirement
-                nearRailway = true;
-            }
-        });
-
+                const distance = userLocation.distanceTo(railPoint);
+                console.log(`Distance to railway point: ${distance} meters`);
+                if (distance <= 70000) {
+                    nearRailway = true;
+                }
+            });
         }
     });
 
     const statusElement = document.getElementById("status");
+    console.log("Near Railway:", nearRailway);
+
     if (nearRailway) {
-        statusElement.innerHTML = "আপনি রেলে আছেন";
+        statusElement.textContent = "আপনি রেলে আছেন";
         await updateDatabase(true);
     } else {
-        statusElement.innerHTML = "আপনি রেলে নেই";
+        statusElement.textContent = "আপনি রেলে নেই";
         await updateDatabase(false);
     }
 
-    setTimeout(checkProximity, 5000); // Continuously check every 5 seconds
+    console.log("Status Updated:", statusElement.textContent);
 
+    setTimeout(() => {
+        checkProximity(position);
+    }, 5000); // Continuously check every 5 seconds
 }
 
 
