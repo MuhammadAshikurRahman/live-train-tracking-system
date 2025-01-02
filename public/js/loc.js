@@ -62,11 +62,11 @@ async function checkProximity(position) {
 // ডায়নামিক মেসেজ আপডেট
 const statusElement = document.getElementById("status");
 if (nearRailway) {
-    statusElement.textContent = "আপনি রেলে আছেন";
+    statusElement.innerHTML = "আপনি রেলে আছেন";
     statusElement.style.color = "green"; // Ensure visible feedback
     await updateDatabase(true);
 } else {
-    statusElement.textContent = "আপনি রেলে নেই";
+    statusElement.innerHTML = "আপনি রেলে নেই";
     statusElement.style.color = "red"; // Ensure visible feedback
     await updateDatabase(false);
 }
