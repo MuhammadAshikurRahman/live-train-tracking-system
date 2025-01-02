@@ -59,14 +59,6 @@ async function checkProximity(position) {
         }
     });
 
-
-    
-const statusContainer = document.getElementById("status-container"); // প্যারেন্ট কন্টেইনার খুঁজে বের করুন
-if (!statusContainer) {
-    console.error("Status container not found!");
-    return;
-}
-
 // ডায়নামিক মেসেজ আপডেট
 const statusElement = document.getElementById("status");
     if (nearRailway) {
